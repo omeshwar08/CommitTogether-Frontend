@@ -10,6 +10,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const dispatch = useDispatch();
     const navigate = useNavigate()
+    const [error, setError] = useState("")
     const handleLogin = async () => {
         try {
             const response = await axios.post(import.meta.env.VITE_API_URL + "/login", {
@@ -18,7 +19,7 @@ const Login = () => {
             dispatch(addUser(response.data))
             navigate("/")
         } catch (error) {
-            console.log(error.message);
+            setError(error?.response?.data)
         }
     }
 
@@ -75,6 +76,8 @@ const Login = () => {
                         Must be more than 8 characters, including
                         <br />At least one number <br />At least one lowercase letter <br />At least one uppercase letter
                     </p>
+                    {/* Error logging in */}
+                    <p className='text-red-700'>{error}</p>
                     {/* Login Button input box */}
                     <div className="card-actions justify-center">
                         <button
