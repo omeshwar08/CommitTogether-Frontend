@@ -34,7 +34,7 @@ const Connections = () => {
                             <div className='text-left mx-4'>
                                 <h2 className='font-bold text-xl'>{firstName + (lastName && (" " + lastName))}</h2>
                                 <h2>{age && gender && age + " " + gender}</h2>
-                                <h2>{about}</h2>
+                                <h2>{about && about}</h2>
                             </div>
                         </div>
                     )

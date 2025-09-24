@@ -7,6 +7,7 @@ import UserCard from "./UserCard";
 const Feed = () => {
     const dispatch = useDispatch();
     const feed = useSelector(store => store.feed)
+
     const getFeed = async () => {
         if (feed) return;
         try {
@@ -19,6 +20,12 @@ const Feed = () => {
     useEffect(() => {
         getFeed();
     })
+    if (!feed) return;
+    if (feed.length <= 0) {
+        return (
+            <div className="text-center my-10 font-bold">No users found</div>
+        )
+    }
     return feed && (
         <div className='flex justify-center items-center mt-15'>
             <UserCard user={feed[0]} />
