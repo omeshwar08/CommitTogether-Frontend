@@ -11,7 +11,11 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const [error, setError] = useState("")
+    const [login, setLogin] = useState(true)
+    const [firstName, setFirstname] = useState("");
+    const [lastName, setLastName] = useState("")
     const handleLogin = async () => {
+        setError("")
         try {
             const response = await axios.post(import.meta.env.VITE_API_URL + "/login", {
                 email, password
@@ -23,11 +27,38 @@ const Login = () => {
         }
     }
 
+    const handleSignUp = async () => {
+        setError("")
+        try {
+            const response = await axios.post(import.meta.env.VITE_API_URL + "/signup", {
+                firstName, lastName, email, password
+            }, {
+                withCredentials: true
+            })
+            dispatch(addUser(response.data.data))
+            navigate("/profile")
+        } catch (error) {
+            setError(error?.response?.data)
+        }
+    }
+
     return (
         <div className='flex justify-center my-10'>
             <div className="card bg-base-300 w-96 shadow-sm">
                 <div className="card-body">
-                    <h2 className="card-title justify-center font-bold">Login</h2>
+                    <h2 className="card-title justify-center font-bold">{login ? "Login" : "SignUp"}</h2>
+                    {
+                        !login && (
+                            <>
+                                <fieldset className="fieldset">
+                                    <input type="text" className="input" placeholder="First Name" value={firstName} onChange={(e) => setFirstname(e.target.value)} />
+                                </fieldset>
+                                <fieldset className="fieldset">
+                                    <input type="text" className="input" placeholder="Last Name" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                                </fieldset>
+                            </>
+                        )
+                    }
                     {/* email input box */}
                     <label className="input validator my-1">
                         <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -82,11 +113,17 @@ const Login = () => {
                     <div className="card-actions justify-center">
                         <button
                             className="btn btn-primary"
-                            onClick={handleLogin}
+                            onClick={login ? handleLogin : handleSignUp}
                         >
-                            Login
+                            {login ? "Login" : "Sign Up"}
                         </button>
                     </div>
+                    <p
+                        className='text-center p-1 m-1 cursor-pointer'
+                        onClick={() => setLogin(!login)}
+                    >
+                        {login ? "New User? Click here to Sign Up" : "Existing User? Click here to Login"}
+                    </p>
                 </div>
             </div>
         </div>

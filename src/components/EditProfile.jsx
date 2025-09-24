@@ -8,7 +8,7 @@ import { addUser } from "../store/userSlice"
 const EditProfile = ({ user }) => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
-    const [gender, setGender] = useState(user.gender);
+    const [gender, setGender] = useState(user.gender || "");
     const [about, setAbout] = useState(user.about);
     const [skills, setSkills] = useState(user.skills);
     const [skillInput, setSkillInput] = useState("");
@@ -17,7 +17,6 @@ const EditProfile = ({ user }) => {
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const [toast, setToast] = useState(false)
-
     const handleAddSkill = (e) => {
         e.preventDefault();
         if (skillInput.trim() && !skills.includes(skillInput.trim().toLowerCase())) {
@@ -25,11 +24,9 @@ const EditProfile = ({ user }) => {
             setSkillInput("");
         }
     };
-
     const handleRemoveSkill = (removeSkill) => {
         setSkills(skills.filter((s) => s !== removeSkill));
     };
-
     const saveProfile = async () => {
         setError("")
         try {
@@ -52,7 +49,6 @@ const EditProfile = ({ user }) => {
             console.log(error.response);
         }
     }
-
     return (
         <div className='flex justify-center my-10'>
             <div className='flex justify-center'>
@@ -78,10 +74,14 @@ const EditProfile = ({ user }) => {
                         <fieldset>
                             <legend className="fieldset-legend">Gender</legend>
                             <select
+                                placeholder="Select Gennder"
                                 className="input"
                                 value={gender}
                                 onChange={(e) => setGender(e.target.value)}
                             >
+                                <option value="" disabled>
+                                    Select Gender
+                                </option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
@@ -149,5 +149,4 @@ const EditProfile = ({ user }) => {
         </div >
     )
 }
-
 export default EditProfile
