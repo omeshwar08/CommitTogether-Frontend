@@ -1,12 +1,35 @@
-# React + Vite
+# 👥 CommitTogether — Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+CommitTogether is a social platform for developers. Create a profile, share updates, interact through likes and comments, and follow other devs to build your circle.
 
-Currently, two official plugins are available:
+🔗 Live: https://committogether.info/  
+🧩 Backend: https://github.com/omeshwar08/CommitTogether-Backend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## ✨ Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Developer profiles (bio, avatar, links)
+- Create posts (text / updates)
+- Authenticated routes & protected pages
+- Clean, responsive UI
+
+---
+
+## 🛠 Tech Stack
+
+- **Next.js (App Router)**, React, TypeScript  
+- Tailwind CSS  
+- Axios for API calls  
+- JWT-based session handling (via backend)
+- State with React hooks/context
+
+---
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/omeshwar08/CommitTogether-Frontend
+cd CommitTogether-Frontend
+npm install
+npm run dev
